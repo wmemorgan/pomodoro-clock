@@ -5,19 +5,13 @@ body {
 
 .wrapper {
     display: grid;
-    /* grid-gap: 10px; */
     grid-template-columns: repeat(4, 1fr) ;
     justify-items: center;
-    /* justify-content: space-evenly; */
-    /* grid-template-rows: repeat(2, [row] auto  ); */
-    /* background-color: #fff; */
     color: #444;
 }
 
 .box {
-    background-color: #444;
     color: #fff;
-    /* border-radius: 5px; */
     padding: 20px;
     font-size: 150%;
     justify-items: center;
@@ -32,19 +26,11 @@ body {
 .heading {
     grid-column: col / span 4;
     font-size: 4em;
-    /* grid-row: row; */
 }
-
-.b {
-    /* grid-column: col 3 / span 2; */
-    /* grid-row: row; */
-}
-
 
 
 .break-settings {
     grid-column: col / span 2;
-    /* grid-row: row 2; */
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
@@ -52,7 +38,6 @@ body {
 
 .session-settings {
     grid-column: col 3 / span 2;
-    /* grid-row: row 2; */
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
@@ -60,27 +45,22 @@ body {
 
 .interval-label {
     grid-column: 1 / 4;
-    /* grid-row: 1; */
 }
 
 .interval-decrease {
     grid-column: 1;
-    /* grid-row: 2; */
 }
 
 .interval {
     grid-column: 2;
-    /* grid-row: 2; */
 }
 
 .interval-increase {
     grid-column: 3;
-    /* grid-row: 2; */
 }
 
 .timer-display {
     grid-column: col / span 4;
-    /* grid-row: row 2; */
     display: grid;
     grid-template-columns: 1fr;
     border: 4px solid green;
@@ -88,10 +68,8 @@ body {
     height: 400px;
     width: 400px;
     justify-items: center;
-    
-
 }
 
 .session-name {
-  padding: 100px;
+  padding: 40px 0px 0px 0px;
 }
