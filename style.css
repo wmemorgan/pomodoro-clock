@@ -53,22 +53,22 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.e {
+.interval-label {
     grid-column: 1 / 4;
     /* grid-row: 1; */
 }
 
-.f {
+.interval-decrease {
     grid-column: 1;
     /* grid-row: 2; */
 }
 
-.g {
+.interval {
     grid-column: 2;
     /* grid-row: 2; */
 }
 
-.i {
+.interval-increase {
     grid-column: 3;
     /* grid-row: 2; */
 }
