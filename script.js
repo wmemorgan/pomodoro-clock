@@ -15,6 +15,9 @@ const decreaseTime = (i) => {
       console.log(parseInt(interval[i].innerHTML));
       console.log("Decrease interval to:",(parseInt(interval[i].innerHTML)-1));
       interval[i].innerHTML = parseInt(interval[i].innerHTML) - 1;
+      if (i === 1) {
+        timer[0].innerHTML = interval[i].innerHTML;
+      }
     }
   }
 };
@@ -24,6 +27,9 @@ const increaseTime = (i) => {
       console.log(parseInt(interval[i].innerHTML)); 
       console.log("Increase interval to: ",(parseInt(interval[i].innerHTML)+ 1));
       interval[i].innerHTML = parseInt(interval[i].innerHTML) + 1;
+      if (i === 1) {
+        timer[0].innerHTML = interval[i].innerHTML;
+      }
   }
 };
 
