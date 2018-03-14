@@ -58,13 +58,9 @@ const countDown = (countDownDate) => {
 // var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
 
 const initializeCountDown = () => {
-  // return () => {
-    // var countDownDate = new Date().getTime() + parseInt(interval[i].innerHTML) * 60000;
-    for (i=1; i > 0; i--) {
-      countDown(timeTarget(i));
-      console.log(i);
-    }
-  // }
+  countDown(timeTarget(1));
+
+
 }
 
 // // Update the count down every 1 second
