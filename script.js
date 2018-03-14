@@ -37,7 +37,7 @@ const timeTarget = (i) => {
     return new Date().getTime() + parseInt(interval[i].innerHTML) * 1000;
 };
 
-const countDown = (countDownDate) => {
+const countDown = (countDownDate, i) => {
     let countdown = setInterval( () => {
       let now = new Date().getTime();
       let intervalLength = countDownDate - now;
@@ -49,18 +49,20 @@ const countDown = (countDownDate) => {
       timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
 
       if (intervalLength < 0) {
-        clearInterval(countdown);
+        timer[0].innerHTML = interval[i].innerHTML;
+        countDownDate = timeTarget(1);
+        countDown(countDownDate,1);
+        //clearInterval(countdown);
       }
     }, 1000);
-
+    
+  
 }
 
 // var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
 
 const initializeCountDown = () => {
-  countDown(timeTarget(1));
-
-
+  countDown(timeTarget(1), 1);
 }
 
 // // Update the count down every 1 second
