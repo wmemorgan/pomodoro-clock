@@ -6,28 +6,25 @@
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="heading">FreeCodeCamp</div>
-    <div id="timer">
-      <div id="interval-settings">
-        <div class="interval-container">
-          <div class="interval-label">break length</div>
-          <div class="interval-decrease">-</div>
-          <div class="interval">5</div>
-          <div class="interval-increase">+</div>
-        </div>
-          <div class="interval-container"></div>
-          <div class="interval-label">session length</div>
-          <div class="interval-decrease">-</div>
-          <div class="interval">25</div>
-          <div class="interval-increase">-</div>
-        </div>
-        <div id="session">Session</div>
-      </div>
-      
-    </div>
+<div class="wrapper">
+  <div class="box heading">FreeCodeCamp</div>
+  <div class="box break-settings">
+    <div class="box interval-label">break length</div>
+    <div class="box interval-decrease">-</div>
+    <div class="box interval">5</div>
+    <div class="box interval-increase">+</div>
   </div>
-
+  <div class="box session-settings">
+    <div class="box interval-label">session length</div>
+    <div class="box interval-decrease">-</div>
+    <div class="box interval">25</div>
+    <div class="box interval-increase">+</div>
+  </div>
+  <div class="box timer-display">
+    <div class="session-name">Session</div>
+    <div class="timer">25</div>
+  </div>
+</div>
   <script src="script.js"></script>
 </body>
 </html>
