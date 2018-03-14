@@ -31,16 +31,69 @@ const timeTarget = (i) => {
 };
 
 const countDown = () => {
-  let now = new Date().getTime();
-  let intervalLength = timeTarget - now ;
-  let minutes = Math.floor((intervalLength % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((intervalLength % (1000 * 60)) / 1000);
-  console.log("Current time:", now);
-  console.log("Interval length:", intervalLength);
-  console.log("m:", minutes, "s:", seconds);
-  timer[0].innerHTML = minutes + ":" + seconds;
-  // console.log("s:", seconds);
+    let countdown = setInterval( () => {
+      let now = new Date().getTime();
+      let intervalLength = countDownDate - now;
+      let minutes = Math.floor((intervalLength % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((intervalLength % (1000 * 60)) / 1000);
+      console.log("Current time:", now);
+      console.log("Interval length:", intervalLength);
+      console.log("m:", minutes, "s:", seconds);
+      timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
+
+    }, 1000);
 }
+
+var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
+
+// // Update the count down every 1 second
+// var countDown = setInterval(function () {
+
+//   // Get todays date and time
+//   var now = new Date().getTime();
+
+//   // Find the distance between now an the count down date
+//   var distance = countDownDate - now;
+
+//   // Time calculations for days, hours, minutes and seconds
+//   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+//   // Display the result in the element with id="demo"
+//   timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
+  
+//   // If the count down is finished, write some text 
+//   if (distance < 0) {
+//     clearInterval(countDown);
+//     timer[0].innerHTML = "EXPIRED";
+//   }
+// }, 1000);
+
+// setInterval(function () {
+
+//   // Get todays date and time
+//   var now = new Date().getTime();
+
+//   // Find the distance between now an the count down date
+//   var distance = countDownDate - now;
+
+//   // Time calculations for days, hours, minutes and seconds
+//   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+//   // Display the result in the element with id="demo"
+//   timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
+
+//   // If the count down is finished, write some text 
+//   // if (distance < 0) {
+//   //   clearInterval(countDown);
+//   //   timer[0].innerHTML = "EXPIRED";
+//   // }
+// }, 1000);
 
 for (let i = 0; i < decrease.length; i++ ) {
   decrease[i].addEventListener("click", decreaseTime(i));
@@ -50,6 +103,6 @@ for (let i = 0; i < increase.length; i++) {
   increase[i].addEventListener("click", increaseTime(i));
 }
 
-for (let i = 0; i < interval.length ; i++) {
-  timeTarget(i);
-}
+// for (let i = 0; i < interval.length ; i++) {
+//   timeTarget(i);
+// }
