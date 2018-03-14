@@ -3,6 +3,7 @@ let interval = document.getElementsByClassName("interval");
 let increase = document.getElementsByClassName("interval-increase");
 let sessionName = document.getElementsByClassName("session-name");
 let timer = document.getElementsByClassName("timer");
+let timerDisplay = document.getElementsByClassName("timer-display");
 
 const decreaseTime = (i) => {
   parseInt(interval[i].innerHTML)
@@ -30,7 +31,7 @@ const timeTarget = (i) => {
     return new Date().getTime() + parseInt(interval[i].innerHTML) * 60000;
 };
 
-const countDown = () => {
+const countDown = (countDownDate) => {
     let countdown = setInterval( () => {
       let now = new Date().getTime();
       let intervalLength = countDownDate - now;
@@ -44,7 +45,14 @@ const countDown = () => {
     }, 1000);
 }
 
-var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
+// var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
+
+const initializeCountDown = (i) => {
+  return () => {
+    var countDownDate = new Date().getTime() + parseInt(interval[i].innerHTML) * 60000;
+    countDown(countDownDate);
+  }
+}
 
 // // Update the count down every 1 second
 // var countDown = setInterval(function () {
@@ -102,6 +110,8 @@ for (let i = 0; i < decrease.length; i++ ) {
 for (let i = 0; i < increase.length; i++) {
   increase[i].addEventListener("click", increaseTime(i));
 }
+
+timerDisplay[0].addEventListener("toggle", initializeCountDown(0));
 
 // for (let i = 0; i < interval.length ; i++) {
 //   timeTarget(i);
