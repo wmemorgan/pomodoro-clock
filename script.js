@@ -28,7 +28,7 @@ const increaseTime = (i) => {
 };
 
 const timeTarget = (i) => {
-    return new Date().getTime() + parseInt(interval[i].innerHTML) * 60000;
+    return new Date().getTime() + parseInt(interval[i].innerHTML) * 1000;
 };
 
 const countDown = (countDownDate) => {
@@ -42,16 +42,23 @@ const countDown = (countDownDate) => {
       console.log("m:", minutes, "s:", seconds);
       timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
 
+      if (intervalLength < 0) {
+        clearInterval(countdown);
+      }
     }, 1000);
+
 }
 
 // var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
 
-const initializeCountDown = (i) => {
-  return () => {
-    var countDownDate = new Date().getTime() + parseInt(interval[i].innerHTML) * 60000;
-    countDown(countDownDate);
-  }
+const initializeCountDown = () => {
+  // return () => {
+    // var countDownDate = new Date().getTime() + parseInt(interval[i].innerHTML) * 60000;
+    for (i=1; i > 0; i--) {
+      countDown(timeTarget(i));
+      console.log(i);
+    }
+  // }
 }
 
 // // Update the count down every 1 second
@@ -111,7 +118,7 @@ for (let i = 0; i < increase.length; i++) {
   increase[i].addEventListener("click", increaseTime(i));
 }
 
-timerDisplay[0].addEventListener("toggle", initializeCountDown(0));
+timerDisplay[0].addEventListener("click", initializeCountDown);
 
 // for (let i = 0; i < interval.length ; i++) {
 //   timeTarget(i);
