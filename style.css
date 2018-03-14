@@ -1,11 +1,11 @@
 body {
-  margin: 40px;
+  margin: 10px;
 }
 
 .wrapper {
     display: grid;
-grid-gap: 10px;
-    grid-template-columns: repeat(4, [col] 150px ) ;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, 1fr) ;
     /* grid-template-rows: repeat(2, [row] auto  ); */
     background-color: #fff;
     color: #444;
@@ -35,7 +35,9 @@ grid-gap: 10px;
     /* grid-row: row; */
 }
 
-.c {
+
+
+.break-settings {
     grid-column: col / span 2;
     /* grid-row: row 2; */
     display: grid;
@@ -43,7 +45,7 @@ grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.d{
+.session-settings {
     grid-column: col 3 / span 2;
     /* grid-row: row 2; */
     display: grid;
