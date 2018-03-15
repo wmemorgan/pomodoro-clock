@@ -4,6 +4,7 @@ let increase = document.getElementsByClassName("interval-increase");
 let sessionName = document.getElementsByClassName("session-name");
 let timer = document.getElementsByClassName("timer");
 let timerDisplay = document.getElementsByClassName("timer-display");
+let pause = document.getElementById("pause");
 
 const decreaseTime = (i) => {
   parseInt(interval[i].innerHTML)
@@ -42,22 +43,24 @@ const countDown = (countDownDate, i) => {
       let now = new Date().getTime();
       let intervalLength = countDownDate - now;
       let minutes = Math.floor((intervalLength % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((intervalLength % (1000 * 60)) / 1000);
+      let seconds = Math.round((intervalLength % (1000 * 60)) / 1000);
       console.log("Current time:", now);
       console.log("Interval length:", intervalLength);
       console.log("m:", minutes, "s:", seconds);
       timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
 
       if (intervalLength < 0) {
-        timer[0].innerHTML = interval[i].innerHTML;
-        countDownDate = timeTarget(1);
-        countDown(countDownDate,1);
-        //clearInterval(countdown);
+        timer[0].innerHTML = interval[0].innerHTML;
+        sessionName[0].innerHTML = "break";
+        countDownDate = timeTarget(0);
+        countDown(countDownDate,0);
+        // clearInterval(countdown);
+        
       }
     }, 1000);
-    
-  
 }
+
+pause.addEventListener("click", clearInterval(countdown));
 
 // var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
 
