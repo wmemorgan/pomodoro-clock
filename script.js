@@ -50,22 +50,37 @@ const countDown = (countDownDate, i) => {
       timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
 
       if (intervalLength < 0) {
-        timer[0].innerHTML = interval[0].innerHTML;
-        sessionName[0].innerHTML = "break";
-        countDownDate = timeTarget(0);
-        countDown(countDownDate,0);
-        // clearInterval(countdown);
+        // timer[0].innerHTML = interval[0].innerHTML;
+        // sessionName[0].innerHTML = "break";
+        // countDownDate = timeTarget(0);
+        // countDown(countDownDate,0);
+        timer[0].innerHTML = interval[i].innerHTML;
+        clearInterval(countdown);
+        return true;
         
       }
     }, 1000);
 }
 
-pause.addEventListener("click", clearInterval(countdown));
+
 
 // var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
 
 const initializeCountDown = () => {
-  countDown(timeTarget(1), 1);
+  let startCountDown = new Promise((resolve,reject) => {
+    countDown(timeTarget(1), 1);
+    if (countDown(timeTarget(1), 1)) {
+      resolve('Resolved');
+    } else {
+      reject('Rejected');
+    }
+  });
+
+  startCountDown
+  .then(fromResolve => countDown(timeTarget(0), 0))
+  .catch(()=> console.log("Can't do that buddy!"))
+  // countDown(timeTarget(1), 1)
+  // .then(countDown(timeTarget(0), 0))
 }
 
 // // Update the count down every 1 second
