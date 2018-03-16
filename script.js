@@ -1,10 +1,20 @@
 let decrease = document.getElementsByClassName("interval-decrease");
 let interval = document.getElementsByClassName("interval");
 let increase = document.getElementsByClassName("interval-increase");
-let sessionName = document.getElementsByClassName("session-name");
-let timer = document.getElementsByClassName("timer");
-let timerDisplay = document.getElementsByClassName("timer-display");
-let pause = document.getElementById("pause");
+let sessionTitle = document.getElementById("session-title");
+let timer = document.getElementById("timer");
+let timerDisplay = document.getElementById("timer-display");
+let start = document.getElementById("start");
+let reset = document.getElementById("reset");
+
+// Initialize global variables
+let t,
+  minutes,
+  seconds = 60,
+  // breakInterval,
+  // sessionInterval,
+  sessionSet = true,
+  buttonToggled = false;
 
 const decreaseTime = (i) => {
   parseInt(interval[i].innerHTML)
@@ -17,7 +27,7 @@ const decreaseTime = (i) => {
       console.log("Decrease interval to:",(parseInt(interval[i].innerHTML)-1));
       interval[i].innerHTML = parseInt(interval[i].innerHTML) - 1;
       if (i === 1) {
-        timer[0].innerHTML = interval[i].innerHTML;
+        timer.innerHTML = interval[i].innerHTML;
       }
     }
   }
@@ -29,108 +39,92 @@ const increaseTime = (i) => {
       console.log("Increase interval to: ",(parseInt(interval[i].innerHTML)+ 1));
       interval[i].innerHTML = parseInt(interval[i].innerHTML) + 1;
       if (i === 1) {
-        timer[0].innerHTML = interval[i].innerHTML;
+        timer.innerHTML = interval[i].innerHTML;
       }
   }
 };
 
-const timeTarget = (i) => {
-    return new Date().getTime() + parseInt(interval[i].innerHTML) * 1000;
-};
-
-const countDown = (countDownDate, i) => {
-    let countdown = setInterval( () => {
-      let now = new Date().getTime();
-      let intervalLength = countDownDate - now;
-      let minutes = Math.floor((intervalLength % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.round((intervalLength % (1000 * 60)) / 1000);
-      console.log("Current time:", now);
-      console.log("Interval length:", intervalLength);
-      console.log("m:", minutes, "s:", seconds);
-      timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
-
-      if (intervalLength < 0) {
-        // timer[0].innerHTML = interval[0].innerHTML;
-        // sessionName[0].innerHTML = "break";
-        // countDownDate = timeTarget(0);
-        // countDown(countDownDate,0);
-        timer[0].innerHTML = interval[i].innerHTML;
-        clearInterval(countdown);
-        return true;
-        
-      }
-    }, 1000);
+function buttonToggle() {
+  if (buttonToggled == false) {
+    start.innerHTML = "pause";
+    buttonToggled = true;
+    startTimer();
+  } else {
+    start.innerHTML = "resume"
+    buttonToggled = false;
+    pauseTimer();
+  }
 }
 
-
-
-// var countDownDate = new Date().getTime() + parseInt(interval[0].innerHTML)*60000;
-
-const initializeCountDown = () => {
-  let startCountDown = new Promise((resolve,reject) => {
-    countDown(timeTarget(1), 1);
-    if (countDown(timeTarget(1), 1)) {
-      resolve('Resolved');
-    } else {
-      reject('Rejected');
-    }
-  });
-
-  startCountDown
-  .then(fromResolve => countDown(timeTarget(0), 0))
-  .catch(()=> console.log("Can't do that buddy!"))
-  // countDown(timeTarget(1), 1)
-  // .then(countDown(timeTarget(0), 0))
+const assignMinutes = () => {
+  if (sessionSet == true) {
+    return minutes = parseInt(interval[1].innerHTML);
+  } else {
+    return minutes = parseInt(interval[0].innerHTML);
+  }
 }
 
-// // Update the count down every 1 second
-// var countDown = setInterval(function () {
+function startTimer() {
+  clearTimeout(t);
+  assignMinutes();
+  if (seconds == 60) {
+    console.log("The minutes are:", minutes);
+    
+    timer.innerHTML = minutes + ":" + "00";
+  } else {
+    timer.innerHTML = minutes - 1 + ":" + (seconds < 10 ? "0" : "") + seconds;
+    console.log("The seconds are:", seconds);
+  }
+  seconds--;
+  if (seconds == 0) {
+    minutes--;
+    console.log("Remaining minutes:", minutes); 
+    seconds = 60;
+  }
+  if (minutes == 0) {
+    //document.getElementById('ding').play();
+    console.log("Countdown ended going to the next session...");
+    timerToggle();
+  }
+  t = setTimeout(startTimer, 1000);
+}
 
-//   // Get todays date and time
-//   var now = new Date().getTime();
+// Seems sort of obvious doesn't it?
+function pauseTimer() {
+  clearTimeout(t);
+}
 
-//   // Find the distance between now an the count down date
-//   var distance = countDownDate - now;
+// Reset timer to user adjusted settings
+function resetTimer() {
+  clearTimeout(t);
+  interval[1].innerHTML = 25;
+  interval[0].innerHTML = 5;
+  buttonToggled = false;
+  if (sessionSet == true) {
+    minutes = parseInt(interval[1].innerHTML);
+  } else {
+    minutes = parseInt(interval[0].innerHTML);
+  }
+  seconds = 60;
+  start.innerHTML = "start";
+  timer.innerHTML = minutes + ":" + "00";
+}
 
-//   // Time calculations for days, hours, minutes and seconds
-//   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-//   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+function timerToggle() {
+  if (sessionSet == true) {
+    minutes = parseInt(interval[0].innerHTML);
+    sessionTitle.innerHTML = "break!";
+    timer.innerHTML = minutes + ":" + "00";
+    sessionSet = false;
+  } else {
+    minutes = parseInt(interval[1].innerHTML);
+    sessionTitle.innerHTML = "session";
+    timer.innerHTML = minutes + ":" + "00";
+    sessionSet = true;
+  }
+}
 
-//   // Display the result in the element with id="demo"
-//   timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
-  
-//   // If the count down is finished, write some text 
-//   if (distance < 0) {
-//     clearInterval(countDown);
-//     timer[0].innerHTML = "EXPIRED";
-//   }
-// }, 1000);
-
-// setInterval(function () {
-
-//   // Get todays date and time
-//   var now = new Date().getTime();
-
-//   // Find the distance between now an the count down date
-//   var distance = countDownDate - now;
-
-//   // Time calculations for days, hours, minutes and seconds
-//   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-//   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-//   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-//   // Display the result in the element with id="demo"
-//   timer[0].innerHTML = minutes + ":" + ('0' + seconds).slice(-2);
-
-//   // If the count down is finished, write some text 
-//   // if (distance < 0) {
-//   //   clearInterval(countDown);
-//   //   timer[0].innerHTML = "EXPIRED";
-//   // }
-// }, 1000);
+//setToDefaults();
 
 for (let i = 0; i < decrease.length; i++ ) {
   decrease[i].addEventListener("click", decreaseTime(i));
@@ -140,8 +134,6 @@ for (let i = 0; i < increase.length; i++) {
   increase[i].addEventListener("click", increaseTime(i));
 }
 
-timerDisplay[0].addEventListener("click", initializeCountDown);
-
-// for (let i = 0; i < interval.length ; i++) {
-//   timeTarget(i);
-// }
+timerDisplay.addEventListener("click", buttonToggle);
+start.addEventListener("click", buttonToggle);
+reset.addEventListener("click", resetTimer);
