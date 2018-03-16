@@ -67,7 +67,7 @@ body, html {
     grid-column: 3;
 }
 
-.timer-display {
+#timer-display {
     grid-column: col / span 4;
     display: grid;
     grid-template-columns: 1fr;
