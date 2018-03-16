@@ -78,6 +78,6 @@ body, html {
     justify-items: center;
 }
 
-.session-name {
+#session-title {
   padding: 60px 0px 0px 0px;
 }
