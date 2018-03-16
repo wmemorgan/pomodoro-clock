@@ -91,8 +91,8 @@ const pauseTimer = () => {
 
 const resetTimer = () => {
   clearTimeout(countDown);
-  interval[1].innerHTML = 25;
-  interval[0].innerHTML = 5;
+  // interval[1].innerHTML = 25;
+  // interval[0].innerHTML = 5;
   timerStarted = false;
   if (sessionSet == true) {
     minutes = parseInt(interval[1].innerHTML);
