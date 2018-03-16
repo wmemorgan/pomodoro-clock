@@ -1,20 +1,17 @@
-let decrease = document.getElementsByClassName("interval-decrease");
-let interval = document.getElementsByClassName("interval");
-let increase = document.getElementsByClassName("interval-increase");
-let sessionTitle = document.getElementById("session-title");
-let timer = document.getElementById("timer");
-let timerDisplay = document.getElementById("timer-display");
-let start = document.getElementById("start");
-let reset = document.getElementById("reset");
-
 // Initialize global variables
-let t,
+let countDown,
   minutes,
   seconds = 60,
-  // breakInterval,
-  // sessionInterval,
   sessionSet = true,
-  buttonToggled = false;
+  timerStarted = false,
+  decrease = document.getElementsByClassName("interval-decrease"),
+  interval = document.getElementsByClassName("interval"),
+  increase = document.getElementsByClassName("interval-increase"),
+  sessionTitle = document.getElementById("session-title"),
+  timer = document.getElementById("timer"),
+  timerDisplay = document.getElementById("timer-display"),
+  start = document.getElementById("start"),
+  reset = document.getElementById("reset");
 
 const decreaseTime = (i) => {
   parseInt(interval[i].innerHTML)
@@ -44,14 +41,14 @@ const increaseTime = (i) => {
   }
 };
 
-function buttonToggle() {
-  if (buttonToggled == false) {
+const pauseResume = () => {
+  if (timerStarted == false) {
     start.innerHTML = "pause";
-    buttonToggled = true;
+    timerStarted = true;
     startTimer();
   } else {
     start.innerHTML = "resume"
-    buttonToggled = false;
+    timerStarted = false;
     pauseTimer();
   }
 }
@@ -64,8 +61,8 @@ const assignMinutes = () => {
   }
 }
 
-function startTimer() {
-  clearTimeout(t);
+const startTimer = () => {
+  clearTimeout(countDown);
   assignMinutes();
   if (seconds == 60) {
     console.log("The minutes are:", minutes);
@@ -82,24 +79,21 @@ function startTimer() {
     seconds = 60;
   }
   if (minutes == 0) {
-    //document.getElementById('ding').play();
     console.log("Countdown ended going to the next session...");
     timerToggle();
   }
-  t = setTimeout(startTimer, 1000);
+  countDown = setTimeout(startTimer, 1000);
 }
 
-// Seems sort of obvious doesn't it?
-function pauseTimer() {
-  clearTimeout(t);
+const pauseTimer = () => {
+  clearTimeout(countDown);
 }
 
-// Reset timer to user adjusted settings
-function resetTimer() {
-  clearTimeout(t);
+const resetTimer = () => {
+  clearTimeout(countDown);
   interval[1].innerHTML = 25;
   interval[0].innerHTML = 5;
-  buttonToggled = false;
+  timerStarted = false;
   if (sessionSet == true) {
     minutes = parseInt(interval[1].innerHTML);
   } else {
@@ -110,7 +104,7 @@ function resetTimer() {
   timer.innerHTML = minutes + ":" + "00";
 }
 
-function timerToggle() {
+const timerToggle = () => {
   if (sessionSet == true) {
     minutes = parseInt(interval[0].innerHTML);
     sessionTitle.innerHTML = "break!";
@@ -124,8 +118,6 @@ function timerToggle() {
   }
 }
 
-//setToDefaults();
-
 for (let i = 0; i < decrease.length; i++ ) {
   decrease[i].addEventListener("click", decreaseTime(i));
 }
@@ -134,6 +126,6 @@ for (let i = 0; i < increase.length; i++) {
   increase[i].addEventListener("click", increaseTime(i));
 }
 
-timerDisplay.addEventListener("click", buttonToggle);
-start.addEventListener("click", buttonToggle);
+timerDisplay.addEventListener("click", pauseResume);
+start.addEventListener("click", pauseResume);
 reset.addEventListener("click", resetTimer);
