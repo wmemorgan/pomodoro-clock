@@ -66,7 +66,6 @@ const startTimer = () => {
   assignMinutes();
   if (seconds == 60) {
     console.log("The minutes are:", minutes);
-    
     timer.innerHTML = minutes + ":" + "00";
   } else {
     timer.innerHTML = minutes - 1 + ":" + (seconds < 10 ? "0" : "") + seconds;
