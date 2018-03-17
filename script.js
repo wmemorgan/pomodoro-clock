@@ -4,6 +4,10 @@ let countDown,
   seconds = 60,
   sessionSet = true,
   timerStarted = false,
+  color1,
+  color2,
+  colorFill = 100,
+  colorIncrement,
   decrease = document.getElementsByClassName("interval-decrease"),
   interval = document.getElementsByClassName("interval"),
   increase = document.getElementsByClassName("interval-increase"),
@@ -61,9 +65,27 @@ const assignMinutes = () => {
   }
 }
 
+const chooseColor = () => {
+  if (sessionSet == true) {
+    return color2 = 'green';
+  } else {
+    return color2 = 'red';
+  }
+}
+
+const resetColor = () => {
+  colorFill = 100;
+  color2 = chooseColor();
+  timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
+}
+
 const startTimer = () => {
   clearTimeout(countDown);
   assignMinutes();
+  color2 = chooseColor();
+  colorIncrement = 101.6 / (minutes * 60);
+  console.log("Color increment is:", colorIncrement);
+ 
   if (seconds == 60) {
     console.log("The minutes are:", minutes);
     timer.innerHTML = minutes + ":" + "00";
@@ -72,8 +94,12 @@ const startTimer = () => {
     console.log("The seconds are:", seconds);
   }
   seconds--;
+  colorFill = colorFill - colorIncrement;
+  timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
   if (seconds == 0) {
     minutes--;
+    colorFill = colorFill - colorIncrement;
+    timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
     console.log("Remaining minutes:", minutes); 
     seconds = 60;
   }
@@ -92,6 +118,7 @@ const resetTimer = () => {
   clearTimeout(countDown);
   // interval[1].innerHTML = 25;
   // interval[0].innerHTML = 5;
+  timerDisplay.style.background = 'linear-gradient(180deg, #444 100%, ' + color2 + ' 100%)'
   timerStarted = false;
   if (sessionSet == true) {
     minutes = parseInt(interval[1].innerHTML);
@@ -109,11 +136,15 @@ const timerToggle = () => {
     sessionTitle.innerHTML = "break!";
     timer.innerHTML = minutes + ":" + "00";
     sessionSet = false;
+    resetColor();
+
+    
   } else {
     minutes = parseInt(interval[1].innerHTML);
     sessionTitle.innerHTML = "session";
     timer.innerHTML = minutes + ":" + "00";
     sessionSet = true;
+    resetColor();
   }
 }
 
