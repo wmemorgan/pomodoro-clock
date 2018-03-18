@@ -83,7 +83,7 @@ const resetColor = () => {
 const changeColor = () => {
   let colorInterval = assignMinutes();
   color2 = chooseColor();
-  colorIncrement = 101.6 / (colorInterval * 60);
+  colorIncrement = 100 / (colorInterval * 60);
   console.log("Color increment is:", colorIncrement);
   colorFill = colorFill - colorIncrement;
   timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
