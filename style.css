@@ -41,7 +41,7 @@ body, html {
 .break-settings {
     grid-column: col / span 2;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 25px;
     margin-top: 25px;
 }
@@ -49,7 +49,7 @@ body, html {
 .session-settings {
     grid-column: col 3 / span 2;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 25px;
     /* padding: 10px 0px 0px 0px; */
     margin-top: 25px;
@@ -81,16 +81,6 @@ body, html {
     font-size: 1.75em;
 }
 
-#start {
-    grid-column: 1 / 4;
-    cursor: pointer;
-}
-
-#reset {
-    grid-column: 1 / 4;
-    cursor: pointer;
-}
-
 #timer-display {
     grid-column: col / span 4;
     display: grid;
@@ -105,10 +95,30 @@ body, html {
 }
 
 #session-title {
-  padding: 60px 0px 0px 0px;
-  text-transform: capitalize;
-  font-size: 3em;
-}
-#timer {
+    grid-column: 1 / 1;
+    padding-top: 60px;
+    text-transform: capitalize;
     font-size: 3em;
 }
+#timer {
+    grid-column: 1 / 1;
+    font-size: 3em;
+}
+
+#timer-settings {
+    grid-column: col / span 4;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+#start {
+    grid-column: 1 / 1;
+    cursor: pointer;
+}
+
+#reset {
+    grid-column: 2 / 2;
+    cursor: pointer;
+}
+
