@@ -67,7 +67,7 @@ const assignMinutes = () => {
 
 const chooseColor = () => {
   if (sessionSet == true) {
-    return color2 = 'green';
+    return color2 = '#8AD503';
   } else {
     return color2 = 'red';
   }
@@ -83,7 +83,7 @@ const startTimer = () => {
   clearTimeout(countDown);
   assignMinutes();
   color2 = chooseColor();
-  colorIncrement = 101.6 / (minutes * 60);
+  colorIncrement = 100.6 / (minutes * 60);
   console.log("Color increment is:", colorIncrement);
  
   if (seconds == 60) {
@@ -99,7 +99,7 @@ const startTimer = () => {
   if (seconds == 0) {
     minutes--;
     colorFill = colorFill - colorIncrement;
-    timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
+    //timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
     console.log("Remaining minutes:", minutes); 
     seconds = 60;
   }
