@@ -2,26 +2,25 @@ body, html {
   margin: auto;
   height: 100%;
   display: grid;
+  font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   background-color: #444;
 }
 
 .wrapper {
-    max-width: 500px;
+    max-width: 650px;
     display: grid;
     grid-template-columns: repeat(4, 1fr) ;
-    grid-auto-rows: minmax(30px, 90px);
-    
+    grid-auto-rows: minmax(50px, 90px);
     justify-items: center;
     /* color: #444; */
 }
 
 .box {
     /* color: #fff; */
-    padding: 2px;
+    padding: 10px;
     /* font-size: 150%; */
     justify-items: center;
-    /* border: 2px solid white; */
 
 }
 
@@ -32,9 +31,10 @@ body, html {
 
 .heading {
     grid-column: col / span 4;
-    border: 1px solid white;
-    padding: 10px;
-    font-size: 3.75em;
+    /* padding: 1px; */
+    font-size: 4em;
+    font-family: 'Pacifico', cursive;
+    text-transform: capitalize;
 }
 
 
@@ -43,6 +43,7 @@ body, html {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 25px;
+    margin-top: 25px;
 }
 
 .session-settings {
@@ -50,24 +51,34 @@ body, html {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 25px;
+    /* padding: 10px 0px 0px 0px; */
+    margin-top: 25px;
 }
 
 .interval-label {
     grid-column: 1 / 4;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    /* padding-top: 20px; */
+    
+    
 }
 
 .interval-decrease {
     grid-column: 1;
     cursor: pointer;
+    font-size: 1.75em;
 }
 
 .interval {
     grid-column: 2;
+    font-size: 1.75em;
 }
 
 .interval-increase {
     grid-column: 3;
     cursor: pointer;
+    font-size: 1.75em;
 }
 
 #start {
@@ -84,8 +95,9 @@ body, html {
     grid-column: col / span 4;
     display: grid;
     grid-template-columns: 1fr;
-    border: 4px solid green;
+    border: 2px solid #8AD503;
     border-radius: 50%;
+    margin-top: 70px;
     height: 270px;
     width: 270px;
     justify-items: center;
@@ -94,4 +106,9 @@ body, html {
 
 #session-title {
   padding: 60px 0px 0px 0px;
+  text-transform: capitalize;
+  font-size: 2.5em;
+}
+#timer {
+    font-size: 3em;
 }
