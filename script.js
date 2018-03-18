@@ -155,6 +155,6 @@ for (let i = 0; i < increase.length; i++) {
 }
 
 minutes = assignMinutes();
-// timerDisplay.addEventListener("click", pauseResume);
+timerDisplay.addEventListener("click", pauseResume);
 start.addEventListener("click", pauseResume);
 reset.addEventListener("click", resetTimer);

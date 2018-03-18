@@ -95,7 +95,7 @@ body, html {
     height: 270px;
     width: 270px;
     justify-items: center;
-    /* cursor: pointer; */
+    cursor: pointer;
 }
 
 #session-title {
@@ -114,8 +114,6 @@ body, html {
     grid-column: col / span 4;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* border: 1px solid white; */
-
 }
 
 #start {
