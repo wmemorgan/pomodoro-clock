@@ -18,7 +18,6 @@ let countDown,
   reset = document.getElementById("reset");
 
 const decreaseTime = (i) => {
-  parseInt(interval[i].innerHTML)
   return () => {
     if (parseInt(interval[i].innerHTML) <= 1) {
       console.log("Cannot decrease interval any further!")
@@ -31,6 +30,7 @@ const decreaseTime = (i) => {
         timer.innerHTML = interval[i].innerHTML;
       }
     }
+    minutes = assignMinutes();
   }
 };
 
@@ -42,7 +42,8 @@ const increaseTime = (i) => {
       if (i === 1) {
         timer.innerHTML = interval[i].innerHTML;
       }
-  }
+    minutes = assignMinutes();
+  } 
 };
 
 const pauseResume = () => {
@@ -59,9 +60,9 @@ const pauseResume = () => {
 
 const assignMinutes = () => {
   if (sessionSet == true) {
-    return minutes = parseInt(interval[1].innerHTML);
+    return parseInt(interval[1].innerHTML);
   } else {
-    return minutes = parseInt(interval[0].innerHTML);
+    return parseInt(interval[0].innerHTML);
   }
 }
 
@@ -79,13 +80,17 @@ const resetColor = () => {
   timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
 }
 
+const changeColor = () => {
+  let colorInterval = assignMinutes();
+  color2 = chooseColor();
+  colorIncrement = 101.6 / (colorInterval * 60);
+  console.log("Color increment is:", colorIncrement);
+  colorFill = colorFill - colorIncrement;
+  timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
+}
+
 const startTimer = () => {
   clearTimeout(countDown);
-  assignMinutes();
-  color2 = chooseColor();
-  colorIncrement = 100.6 / (minutes * 60);
-  console.log("Color increment is:", colorIncrement);
- 
   if (seconds == 60) {
     console.log("The minutes are:", minutes);
     timer.innerHTML = minutes + ":" + "00";
@@ -94,20 +99,20 @@ const startTimer = () => {
     console.log("The seconds are:", seconds);
   }
   seconds--;
-  colorFill = colorFill - colorIncrement;
-  timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
   if (seconds == 0) {
+    console.log("The minutes are...", minutes); 
     minutes--;
-    colorFill = colorFill - colorIncrement;
-    //timerDisplay.style.background = 'linear-gradient(180deg, #444 ' + colorFill + '%, ' + color2 + ' ' + colorFill + '%)';
-    console.log("Remaining minutes:", minutes); 
     seconds = 60;
+    console.log("Minutes after subtraction:", minutes); 
   }
   if (minutes == 0) {
     console.log("Countdown ended going to the next session...");
     timerToggle();
   }
-  countDown = setTimeout(startTimer, 1000);
+  countDown = setTimeout( () => {
+    startTimer();
+    changeColor();
+  }, 1000);
 }
 
 const pauseTimer = () => {
@@ -120,27 +125,20 @@ const resetTimer = () => {
   // interval[0].innerHTML = 5;
   timerDisplay.style.background = 'linear-gradient(180deg, #444 100%, ' + color2 + ' 100%)'
   timerStarted = false;
-  if (sessionSet == true) {
-    minutes = parseInt(interval[1].innerHTML);
-  } else {
-    minutes = parseInt(interval[0].innerHTML);
-  }
+  minutes = assignMinutes();
   seconds = 60;
   start.innerHTML = "start";
   timer.innerHTML = minutes + ":" + "00";
 }
 
 const timerToggle = () => {
+  minutes = assignMinutes();
   if (sessionSet == true) {
-    minutes = parseInt(interval[0].innerHTML);
     sessionTitle.innerHTML = "break!";
     timer.innerHTML = minutes + ":" + "00";
     sessionSet = false;
     resetColor();
-
-    
   } else {
-    minutes = parseInt(interval[1].innerHTML);
     sessionTitle.innerHTML = "session";
     timer.innerHTML = minutes + ":" + "00";
     sessionSet = true;
@@ -156,6 +154,7 @@ for (let i = 0; i < increase.length; i++) {
   increase[i].addEventListener("click", increaseTime(i));
 }
 
+minutes = assignMinutes();
 timerDisplay.addEventListener("click", pauseResume);
 start.addEventListener("click", pauseResume);
 reset.addEventListener("click", resetTimer);
